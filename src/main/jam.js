@@ -2,42 +2,7 @@
  * @namespace
  * 
  * @description
- * This objects provides a collection of functions, suitable for JavaScript activities modeling (jam).
- * 
- * @example
- * function handleOk() {
- * 	var requestItems = [];
- * 	var responseItems = [];
- * 	var failedItems = [];
- * 	
- * 	var iterator = {
- * 		index: 0,
- * 		item: undefined
- * 	};
- * 	
- * 	jam.execute(
- * 		jam.runCleanup({
- * 			run: jam.sequence(
- * 				maskForm,
- * 				getFormItemsToProcess(requestItems),
- * 				submitProcessingRequest(requestItems, responseItems),
- * 				jam.repeat({
- * 					test: nextItem(responseItems, iterator),
- * 					run: jam.choose({
- * 						test: isSuccessfullyProcessed(iterator),
- * 						run: updateFormItem(iterator)
- * 					}, {
- * 						test: jam.always(),
- * 						run: jam.async(function () { failedItems.push(iterator.item); })
- * 					})
- * 				}),
- * 				informOnFailedItems(failedItems),
- * 				jam.always(true, submitRefreshDataRequest(failedItems))
- * 			),
- * 			cleanup: unmaskForm
- * 		})
- * 	);
- * }
+ * This object provides a collection of functions, suitable for JavaScript activities modeling (jam).
  */
 var jam = {
 	/**
@@ -53,7 +18,7 @@ var jam = {
 	 * represents a completion callback function.
 	 * 
 	 * @param {Function} [fs]
-	 * Subsequent functions to execute. Should follow the same specification as <code>f</code> parameter.
+	 * Additional/subsequent functions to execute. Should follow the same specification as <code>f</code> parameter.
 	 * 
 	 * @returns {Function}
 	 * Asynchronous function that accepts completion callback, and hence, might be used as parameter for other
